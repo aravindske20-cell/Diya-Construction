@@ -23,7 +23,10 @@
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
 
   body {
     background: var(--dark);
@@ -31,6 +34,24 @@
     font-family: 'Outfit', sans-serif;
     overflow-x: hidden;
     cursor: none;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  img,
+  video,
+  iframe,
+  svg,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  section,
+  div,
+  nav,
+  footer {
+    max-width: 100%;
   }
 
   /* Custom Cursor */
@@ -68,6 +89,7 @@
     display: flex; align-items: center; justify-content: space-between;
     padding: 24px 60px;
     transition: all 0.4s;
+    width: 100%;
   }
   nav.scrolled {
     background: rgba(10,10,10,0.95);
@@ -78,6 +100,8 @@
   .nav-logo {
     display: flex; align-items: center; gap: 12px;
     text-decoration: none;
+    min-width: 0;
+    flex: 1;
   }
   .nav-logo-icon {
     width: 44px; height: 44px;
@@ -88,18 +112,26 @@
     font-size: 18px; font-weight: 700;
     color: var(--dark);
     flex-shrink: 0;
+    overflow: hidden;
   }
 
-  .nav-logo-text { display: flex; flex-direction: column; line-height: 1; }
+  .nav-logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    min-width: 0;
+  }
   .nav-logo-name {
     font-family: 'Cormorant Garamond', serif;
     font-size: 20px; font-weight: 700;
     color: var(--white); letter-spacing: 1px;
+    white-space: nowrap;
   }
   .nav-logo-sub {
     margin-top: 5px;
     font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
     color: var(--gold); font-weight: 500;
+    white-space: nowrap;
   }
   .nav-links {
     display: flex; align-items: center; gap: 40px;
@@ -126,11 +158,14 @@
     text-transform: uppercase; text-decoration: none;
     transition: all 0.3s;
     clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    white-space: nowrap;
+    flex-shrink: 0;
   }
   .nav-cta:hover { background: var(--gold-light); transform: translateY(-1px); }
   .hamburger {
     display: none; flex-direction: column; gap: 5px;
     cursor: none; padding: 4px;
+    flex-shrink: 0;
   }
   .hamburger span {
     width: 24px; height: 2px; background: var(--gold);
@@ -148,13 +183,14 @@
 
   /* HERO */
   .hero {
-    height: 100vh; position: relative;
+    min-height: 100vh; position: relative;
     display: flex; align-items: center;
     overflow: hidden;
+    padding-top: 100px;
   }
   .hero-bg {
     position: absolute; inset: 0;
-    background: 
+    background:
       linear-gradient(135deg, rgba(10,10,10,0.97) 0%, rgba(10,10,10,0.6) 50%, rgba(10,10,10,0.85) 100%),
       url('https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1800&q=80') center/cover no-repeat;
     transform: scale(1.05);
@@ -163,7 +199,7 @@
   .hero-bg.loaded { transform: scale(1); }
   .hero-grid-overlay {
     position: absolute; inset: 0;
-    background-image: 
+    background-image:
       linear-gradient(rgba(200,151,42,0.04) 1px, transparent 1px),
       linear-gradient(90deg, rgba(200,151,42,0.04) 1px, transparent 1px);
     background-size: 80px 80px;
@@ -171,14 +207,15 @@
   .hero-content {
     position: relative; z-index: 2;
     padding: 0 60px; max-width: 900px;
+    width: 100%;
   }
   .hero-tag {
-    margin-top: 50%;
     display: inline-flex; align-items: center; gap: 10px;
     font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
     color: var(--gold); font-weight: 500;
     margin-bottom: 32px;
     opacity: 0; animation: fadeUp 0.8s 0.3s forwards;
+    flex-wrap: wrap;
   }
   .hero-tag::before {
     content: ''; width: 40px; height: 1px; background: var(--gold);
@@ -203,6 +240,7 @@
   .hero-actions {
     display: flex; align-items: center; gap: 32px;
     opacity: 0; animation: fadeUp 0.8s 0.9s forwards;
+    flex-wrap: wrap;
   }
   .btn-primary {
     display: inline-flex; align-items: center; gap: 12px;
@@ -212,6 +250,7 @@
     text-transform: uppercase;
     clip-path: polygon(12px 0%, 100% 0%, calc(100% - 12px) 100%, 0% 100%);
     transition: all 0.3s;
+    max-width: 100%;
   }
   .btn-primary:hover { background: var(--gold-light); transform: translateY(-2px); }
   .btn-secondary {
@@ -219,6 +258,7 @@
     color: var(--text); text-decoration: none;
     font-size: 13px; font-weight: 500; letter-spacing: 1px;
     text-transform: uppercase; transition: color 0.3s;
+    max-width: 100%;
   }
   .btn-secondary:hover { color: var(--gold); }
   .btn-secondary .play-icon {
@@ -226,6 +266,7 @@
     border: 1px solid rgba(200,151,42,0.4);
     display: flex; align-items: center; justify-content: center;
     transition: all 0.3s;
+    flex-shrink: 0;
   }
   .btn-secondary:hover .play-icon { background: rgba(200,151,42,0.1); border-color: var(--gold); }
   .hero-stats {
@@ -268,6 +309,7 @@
     display: inline-flex; align-items: center; gap: 10px;
     font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
     color: var(--gold); font-weight: 500; margin-bottom: 20px;
+    flex-wrap: wrap;
   }
   .section-tag::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
   .section-title {
@@ -275,6 +317,7 @@
     font-size: clamp(40px, 5vw, 72px);
     font-weight: 300; line-height: 1.05;
     color: var(--white); margin-bottom: 24px;
+    overflow-wrap: break-word;
   }
   .section-title em { font-style: italic; color: var(--gold); }
   .section-desc {
@@ -291,6 +334,7 @@
   .ticker-inner {
     display: flex; gap: 0; white-space: nowrap;
     animation: ticker 30s linear infinite;
+    width: max-content;
   }
   .ticker-item {
     display: inline-flex; align-items: center; gap: 20px;
@@ -359,12 +403,13 @@
 
   /* SERVICES */
   .services { background: var(--dark); }
-  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; }
-  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+  .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 80px; gap: 24px; }
+  .services-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
   .service-card {
     padding: 48px 40px; background: var(--dark2);
     position: relative; overflow: hidden;
     transition: all 0.4s; cursor: none;
+    min-width: 0;
   }
   .service-card::before {
     content: ''; position: absolute; inset: 0;
@@ -409,8 +454,8 @@
 
   /* PROJECTS / PORTFOLIO */
   .projects { background: var(--dark3); }
-  .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
-  .filter-tabs { display: flex; gap: 4px; }
+  .projects-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; gap: 24px; }
+  .filter-tabs { display: flex; gap: 4px; flex-wrap: wrap; }
   .filter-tab {
     padding: 8px 20px; background: transparent;
     border: 1px solid rgba(200,151,42,0.2); cursor: none;
@@ -424,13 +469,14 @@
   }
   .projects-masonry {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     grid-template-rows: auto;
     gap: 16px;
   }
   .proj-card {
     position: relative; overflow: hidden; cursor: none;
     border: 1px solid rgba(200,151,42,0.05);
+    min-width: 0;
   }
   .proj-card:nth-child(1) { grid-column: 1/6; grid-row: 1/3; }
   .proj-card:nth-child(2) { grid-column: 6/9; grid-row: 1/2; }
@@ -479,7 +525,7 @@
   /* PROCESS */
   .process { background: var(--dark2); }
   .process-grid {
-    display: grid; grid-template-columns: repeat(5, 1fr);
+    display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 0; margin-top: 80px; position: relative;
   }
   .process-grid::before {
@@ -492,6 +538,7 @@
     padding: 40px 24px; text-align: center;
     position: relative; z-index: 1;
     transition: all 0.3s;
+    min-width: 0;
   }
   .process-step:hover { transform: translateY(-8px); }
   .process-num-wrap {
@@ -522,9 +569,9 @@
   .stats-section {
     background: var(--gold);
     padding: 80px 60px;
-    display: grid; grid-template-columns: repeat(4, 1fr);
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
   }
-  .stats-item { text-align: center; padding: 20px; }
+  .stats-item { text-align: center; padding: 20px; min-width: 0; }
   .stats-item + .stats-item { border-left: 1px solid rgba(0,0,0,0.15); }
   .stats-num {
     font-family: 'Cormorant Garamond', serif;
@@ -551,7 +598,7 @@
     100% { transform: translateX(-50%); }
   }
   .testimonial-card {
-    width: 400px; flex-shrink: 0;
+    width: 400px; max-width: calc(100vw - 48px); flex-shrink: 0;
     padding: 40px; background: var(--dark2);
     border: 1px solid rgba(200,151,42,0.1);
     border-top: 3px solid var(--gold);
@@ -569,6 +616,7 @@
   .author-avatar {
     width: 52px; height: 52px; border-radius: 50%;
     object-fit: cover; border: 2px solid var(--gold);
+    flex-shrink: 0;
   }
   .author-name { font-size: 15px; font-weight: 600; color: var(--white); }
   .author-role { font-size: 12px; color: var(--gold); letter-spacing: 1px; }
@@ -577,8 +625,8 @@
 
   /* TEAM */
   .team { background: var(--dark2); }
-  .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 60px; }
-  .team-card { position: relative; overflow: hidden; cursor: none; }
+  .team-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 60px; }
+  .team-card { position: relative; overflow: hidden; cursor: none; min-width: 0; }
   .team-img {
     width: 100%;
     object-fit: cover; transition: transform 0.6s ease;
@@ -605,21 +653,31 @@
     display: flex; align-items: center; justify-content: center;
     text-decoration: none; color: var(--gold); font-size: 13px;
     transition: all 0.3s;
+    flex-shrink: 0;
   }
   .team-social a:hover { background: var(--gold); color: var(--dark); }
 
   /* QUOTATION */
   .quotation {
     background: var(--dark3);
-    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 80px; align-items: start;
   }
-  .quote-form-wrap { }
+  .quote-form-wrap { min-width: 0; }
   .form-title {
     font-family: 'Cormorant Garamond', serif;
     font-size: 42px; color: var(--white); margin-bottom: 32px;
+    line-height: 1.1;
   }
-  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  .form-field { grid-column: 1/3; }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    width: 100%;
+  }
+  .form-field {
+    grid-column: 1/3;
+    min-width: 0;
+  }
   .form-field.half { grid-column: auto; }
   .form-field label {
     display: block; font-size: 11px; letter-spacing: 2px;
@@ -636,6 +694,7 @@
     font-family: 'Outfit', sans-serif; font-size: 14px;
     transition: all 0.3s; outline: none;
     appearance: none; border-radius: 0;
+    min-width: 0;
   }
   .form-field input:focus,
   .form-field select:focus,
@@ -660,7 +719,7 @@
     border: 1px solid var(--gold); margin-top: 16px;
     font-size: 14px; color: var(--gold); text-align: center;
   }
-  .quote-info { padding-top: 20px; }
+  .quote-info { padding-top: 20px; min-width: 0; }
   .info-item {
     display: flex; gap: 20px; padding: 28px 0;
     border-bottom: 1px solid rgba(200,151,42,0.1);
@@ -676,8 +735,8 @@
     font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
     color: var(--gold); margin-bottom: 6px;
   }
-  .info-value { font-size: 15px; color: var(--text); font-weight: 500; }
-  .info-sub { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+  .info-value { font-size: 15px; color: var(--text); font-weight: 500; word-break: break-word; }
+  .info-sub { font-size: 13px; color: var(--text-muted); margin-top: 4px; word-break: break-word; }
   .map-placeholder {
     margin-top: 32px; height: 240px;
     background: var(--dark2); border: 1px solid rgba(200,151,42,0.15);
@@ -688,6 +747,7 @@
     content: 'DIYA CONSTRUCTIONS HQ\A Chengalpattu, Tamil Nadu';
     white-space: pre; text-align: center;
     font-size: 14px; color: var(--text-muted); letter-spacing: 1px;
+    z-index: 1;
   }
   .map-grid-bg {
     position: absolute; inset: 0;
@@ -710,8 +770,8 @@
 
   /* BLOG */
   .blog { background: var(--dark2); }
-  .blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 60px; }
-  .blog-card { cursor: none; }
+  .blog-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin-top: 60px; }
+  .blog-card { cursor: none; min-width: 0; }
   .blog-img-wrap { overflow: hidden; margin-bottom: 24px; }
   .blog-img {
     width: 100%; aspect-ratio: 16/10;
@@ -733,6 +793,7 @@
     display: flex; align-items: center; gap: 16px;
     margin-top: 20px; padding-top: 20px;
     border-top: 1px solid rgba(200,151,42,0.1);
+    flex-wrap: wrap;
   }
   .blog-date { font-size: 12px; color: var(--text-muted); }
   .blog-read {
@@ -752,13 +813,14 @@
     font-size: 14px; line-height: 1.8; color: var(--text-muted);
     margin: 20px 0; max-width: 280px;
   }
-  .footer-social { display: flex; gap: 12px; }
+  .footer-social { display: flex; gap: 12px; flex-wrap: wrap; }
   .footer-social a {
     width: 40px; height: 40px;
     border: 1px solid rgba(200,151,42,0.2);
     display: flex; align-items: center; justify-content: center;
     color: var(--text-muted); font-size: 14px; text-decoration: none;
     transition: all 0.3s;
+    flex-shrink: 0;
   }
   .footer-social a:hover { background: var(--gold); color: var(--dark); border-color: var(--gold); }
   .footer-col h4 {
@@ -774,16 +836,18 @@
   .footer-col ul li a::before {
     content: ''; width: 12px; height: 1px;
     background: rgba(200,151,42,0.3); transition: width 0.3s, background 0.3s;
+    flex-shrink: 0;
   }
   .footer-col ul li a:hover { color: var(--gold); }
   .footer-col ul li a:hover::before { width: 20px; background: var(--gold); }
   .footer-bottom {
     display: flex; justify-content: space-between; align-items: center;
     padding-top: 32px; border-top: 1px solid rgba(200,151,42,0.1);
+    gap: 20px;
   }
   .footer-copy { font-size: 13px; color: var(--text-muted); }
   .footer-copy span { color: var(--gold); }
-  .footer-legal { display: flex; gap: 24px; }
+  .footer-legal { display: flex; gap: 24px; flex-wrap: wrap; }
   .footer-legal a { font-size: 13px; color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
   .footer-legal a:hover { color: var(--gold); }
 
@@ -807,10 +871,11 @@
     z-index: 2000; display: flex; align-items: center; justify-content: center;
     opacity: 0; pointer-events: none; transition: opacity 0.3s;
     backdrop-filter: blur(12px);
+    padding: 20px;
   }
   .modal-overlay.open { opacity: 1; pointer-events: all; }
   .modal {
-    max-width: 600px; width: 90%; padding: 60px;
+    max-width: 600px; width: 100%; padding: 60px;
     background: var(--dark2); border: 1px solid rgba(200,151,42,0.2);
     position: relative; transform: translateY(40px);
     transition: transform 0.4s;
@@ -827,14 +892,16 @@
   .mobile-nav {
     position: fixed; inset: 0; background: var(--dark);
     z-index: 999; display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 32px;
+    flex-direction: column; gap: 24px;
     transform: translateX(100%); transition: transform 0.4s ease;
+    padding: 24px;
   }
   .mobile-nav.open { transform: translateX(0); }
   .mobile-nav a {
     font-family: 'Cormorant Garamond', serif;
     font-size: 40px; font-weight: 600; color: var(--white);
     text-decoration: none; transition: color 0.3s;
+    text-align: center;
   }
   .mobile-nav a:hover { color: var(--gold); }
 
@@ -854,50 +921,405 @@
     section { padding: 80px 32px; }
     .about { grid-template-columns: 1fr; gap: 60px; padding: 80px 32px; }
     .about-img-accent { display: none; }
-    .services-grid { grid-template-columns: 1fr 1fr; }
-    .projects-masonry { grid-template-columns: 1fr 1fr; }
+    .services-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .projects-masonry { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .proj-card:nth-child(n) { grid-column: auto; grid-row: auto; }
-    .process-grid { grid-template-columns: 1fr 1fr; }
+    .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .process-grid::before { display: none; }
-    .stats-section { grid-template-columns: 1fr 1fr; padding: 60px 32px; }
+    .stats-section { grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 60px 32px; }
     .stats-item + .stats-item { border-left: none; border-top: 1px solid rgba(0,0,0,0.15); }
-    .team-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .quotation { grid-template-columns: 1fr; gap: 60px; }
-    .blog-grid { grid-template-columns: 1fr 1fr; }
+    .blog-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     .hero-stats { bottom: 32px; right: 32px; gap: 32px; }
     .hero-content { padding: 0 32px; }
-    .services-header { flex-direction: column; align-items: flex-start; gap: 24px; }
-    .projects-header { flex-direction: column; align-items: flex-start; gap: 24px; }
+    .services-header,
+    .projects-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
   }
 
   @media (max-width: 640px) {
-    .hero-title { font-size: 48px; }
-    .hero-stats { display: none; }
-    .services-grid { grid-template-columns: 1fr; }
-    .projects-masonry { grid-template-columns: 1fr; }
-    .process-grid { grid-template-columns: 1fr; }
-    .stats-section { grid-template-columns: 1fr; }
-    .team-grid { grid-template-columns: 1fr; }
-    .blog-grid { grid-template-columns: 1fr; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .form-grid { grid-template-columns: 1fr; }
-    .form-field.half { grid-column: auto; }
     body { cursor: auto; }
     .cursor, .cursor-follower { display: none; }
+
+    nav,
+    nav.scrolled {
+      padding: 14px 16px;
+    }
+
+    .nav-logo {
+      gap: 10px;
+      min-width: 0;
+      max-width: calc(100% - 44px);
+    }
+
+    .nav-logo-icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .nav-logo-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .nav-logo-name {
+      font-size: 18px;
+      white-space: normal;
+      line-height: 1.05;
+    }
+
+    .nav-logo-sub {
+      font-size: 8px;
+      letter-spacing: 1.8px;
+      white-space: normal;
+      line-height: 1.3;
+    }
+
+    .hero {
+      min-height: auto;
+      padding-top: 110px;
+      padding-bottom: 80px;
+    }
+
+    .hero-content {
+      padding: 0 16px;
+    }
+
+    .hero-tag {
+      margin-bottom: 20px;
+      font-size: 10px;
+      letter-spacing: 2px;
+      gap: 8px;
+    }
+
+    .hero-tag::before {
+      width: 26px;
+    }
+
+    .hero-title {
+      font-size: clamp(42px, 12vw, 56px);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 14px;
+      line-height: 1.75;
+      margin-bottom: 28px;
+      max-width: 100%;
+    }
+
+    .hero-actions {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 14px;
+      width: 100%;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero-stats,
+    .hero-scroll {
+      display: none;
+    }
+
+    section {
+      padding: 64px 16px;
+    }
+
+    .section-tag {
+      font-size: 10px;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+
+    .section-tag::before {
+      width: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(34px, 10vw, 46px);
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .section-desc {
+      font-size: 14px;
+      line-height: 1.8;
+      max-width: 100%;
+    }
+
+    .about {
+      padding: 64px 16px;
+      gap: 32px;
+    }
+
+    .about-badge {
+      width: 86px;
+      height: 86px;
+      top: 16px;
+      left: 12px;
+    }
+
+    .about-badge-num {
+      font-size: 24px;
+    }
+
+    .about-badge-text {
+      font-size: 7px;
+    }
+
+    .about-list {
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .about-list li {
+      font-size: 13px;
+      align-items: flex-start;
+    }
+
+    .about-awards {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .services-header,
+    .projects-header {
+      margin-bottom: 32px;
+      gap: 16px;
+    }
+
+    .services-grid,
+    .projects-masonry,
+    .process-grid,
+    .stats-section,
+    .team-grid,
+    .blog-grid,
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-card {
+      padding: 32px 20px;
+    }
+
+    .service-num {
+      font-size: 48px;
+      top: 16px;
+      right: 18px;
+    }
+
+    .service-title {
+      font-size: 22px;
+    }
+
+    .proj-img {
+      min-height: 220px;
+    }
+
+    .proj-overlay,
+    .proj-always {
+      padding: 18px;
+    }
+
+    .proj-name {
+      font-size: 20px;
+    }
+
+    .process-grid {
+      margin-top: 40px;
+    }
+
+    .process-step {
+      padding: 24px 12px;
+    }
+
+    .process-num-wrap {
+      width: 68px;
+      height: 68px;
+      margin-bottom: 18px;
+    }
+
+    .process-label {
+      font-size: 18px;
+    }
+
+    .stats-section {
+      padding: 48px 16px;
+    }
+
+    .stats-item {
+      padding: 18px 8px;
+    }
+
+    .stats-item + .stats-item {
+      border-left: none;
+      border-top: 1px solid rgba(0,0,0,0.15);
+    }
+
+    .stats-num {
+      font-size: 50px;
+    }
+
+    .testimonial-card {
+      width: calc(100vw - 32px);
+      max-width: calc(100vw - 32px);
+      padding: 24px 20px;
+    }
+
+    .testimonial-text {
+      font-size: 14px;
+    }
+
+    .team-info {
+      transform: translateY(0);
+      padding: 22px 16px;
+    }
+
+    .team-name {
+      font-size: 20px;
+    }
+
+    .quotation {
+      gap: 40px;
+    }
+
+    .form-title {
+      font-size: 32px;
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .form-field,
+    .form-field.half {
+      grid-column: auto;
+    }
+
+    .form-field label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      margin-bottom: 6px;
+    }
+
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    .form-field textarea {
+      min-height: 140px;
+    }
+
+    .form-submit {
+      margin-top: 18px;
+      padding: 15px 20px;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+    }
+
+    .info-item {
+      gap: 14px;
+      padding: 20px 0;
+    }
+
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      font-size: 18px;
+    }
+
+    .info-value,
+    .info-sub {
+      font-size: 14px;
+    }
+
+    .map-placeholder {
+      height: 200px;
+      margin-top: 24px;
+    }
+
+    .blog-img-wrap {
+      margin-bottom: 18px;
+    }
+
+    .blog-title {
+      font-size: 22px;
+    }
+
+    .blog-meta {
+      gap: 10px;
+    }
+
+    .blog-read {
+      margin-left: 0;
+    }
+
+    footer {
+      padding: 56px 16px 28px;
+    }
+
+    .footer-brand p {
+      max-width: 100%;
+      font-size: 13px;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .footer-legal {
+      gap: 14px;
+    }
+
+    .mobile-nav a {
+      font-size: 28px;
+    }
+
+    .back-top {
+      width: 46px;
+      height: 46px;
+      right: 16px;
+      bottom: 16px;
+      font-size: 18px;
+    }
+
+    .modal {
+      padding: 36px 20px;
+    }
   }
 </style>
 </head>
 <body>
 
-<!-- CURSOR -->
 <div class="cursor" id="cursor"></div>
 <div class="cursor-follower" id="cursorFollower"></div>
 
-<!-- NAV -->
 <nav id="navbar">
   <a href="#" class="nav-logo">
-    <div class="nav-logo-icon"><img style="height: 40px; width: 50px;" src="https://i.postimg.cc/grFxRQtk/IMG-20260403-122108.jpg" alt="Diya Constructions Logo"></div>
+    <div class="nav-logo-icon">
+      <img style="height: 40px; width: 50px;" src="https://i.postimg.cc/grFxRQtk/IMG-20260403-122108.jpg" alt="Diya Constructions Logo">
+    </div>
     <div class="nav-logo-text">
       <span class="nav-logo-name">Diya Constructions</span>
       <span class="nav-logo-sub">Building Excellence Since 2020</span>
@@ -917,7 +1339,6 @@
   </div>
 </nav>
 
-<!-- MOBILE NAV -->
 <div class="mobile-nav" id="mobileNav">
   <a href="#about" onclick="toggleMobileNav()">About</a>
   <a href="#services" onclick="toggleMobileNav()">Services</a>
@@ -926,7 +1347,6 @@
   <a href="#contact" onclick="toggleMobileNav()">Get Quote</a>
 </div>
 
-<!-- HERO -->
 <section class="hero">
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-grid-overlay"></div>
@@ -973,7 +1393,6 @@
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker">
   <div class="ticker-inner">
     <span class="ticker-item"><span class="ticker-dot"></span> Residential Villas</span>
@@ -995,7 +1414,6 @@
   </div>
 </div>
 
-<!-- ABOUT -->
 <section class="about" id="about">
   <div class="about-visual reveal">
     <img class="about-img-main" src="https://i.postimg.cc/KjJJ97LD/1528.jpg" alt="Diya Constructions team at work">
@@ -1009,7 +1427,7 @@
     <div class="section-tag">Our Story</div>
     <h2 class="section-title">Crafting <em>Landmark</em><br>Structures Since 2020</h2>
     <p class="section-desc">
-       Constructions began as a modest residential contractor. Today, we are a growing construction company, steadily building our presence across the region. Our work focuses on residential projects, commercial spaces, and customized construction solutions with a commitment to quality and trust.
+      Constructions began as a modest residential contractor. Today, we are a growing construction company, steadily building our presence across the region. Our work focuses on residential projects, commercial spaces, and customized construction solutions with a commitment to quality and trust.
     </p>
     <ul class="about-list">
       <li>ISO 9001:2015 Certified Construction Firm</li>
@@ -1019,12 +1437,10 @@
       <li>Zero major safety incidents since 2018</li>
       <li>Delivering projects on time with budget integrity</li>
     </ul>
-    <div class="about-awards">
-    </div>
+    <div class="about-awards"></div>
   </div>
 </section>
 
-<!-- SERVICES -->
 <section class="services" id="services">
   <div class="services-header">
     <div>
@@ -1087,45 +1503,26 @@
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section class="projects" id="projects">
   <div class="projects-header">
     <div>
       <div class="section-tag reveal">Portfolio</div>
       <h2 class="section-title reveal">Our <em>Landmark</em> Projects</h2>
     </div>
-    <div class="filter-tabs reveal">
-    </div>
+    <div class="filter-tabs reveal"></div>
   </div>
   <div class="projects-masonry" id="projectsGrid">
-    <div class="proj-card" data-cat="residential">
-      <img class="proj-img" src="https://i.postimg.cc/zv00dwWH/1560.jpg" alt="Project 1">
-    </div>
-    <div class="proj-card" data-cat="commercial">
-      <img class="proj-img" src="https://i.postimg.cc/fWK2TsFs/1578.jpg" alt="Project 2">
-    </div>
-    <div class="proj-card" data-cat="industrial">
-      <img class="proj-img" src="https://i.postimg.cc/qMvmNYV9/1580.jpg" alt="Project 3">
-    </div>
-    <div class="proj-card" data-cat="residential">
-      <img class="proj-img" src="https://i.postimg.cc/KcNqvbVv/1583.jpg" alt="Project 4">
-    </div>
-    <div class="proj-card" data-cat="commercial">
-      <img class="proj-img" src="https://i.postimg.cc/ryJnFTbx/1584.jpg" alt="Project 5">
-    </div>
-    <div class="proj-card" data-cat="residential">
-      <img class="proj-img" src="https://i.postimg.cc/KcNqvbVz/1585.jpg" alt="Project 6">
-    </div>
-    <div class="proj-card" data-cat="industrial">
-      <img class="proj-img" src="https://i.postimg.cc/J4zTsgCw/1591.jpg" alt="Project 7">
-    </div>
-    <div class="proj-card" data-cat="commercial">
-      <img class="proj-img" src="https://i.postimg.cc/Wb19dKLX/1594.jpg" alt="Project 8">
-    </div>
+    <div class="proj-card" data-cat="residential"><img class="proj-img" src="https://i.postimg.cc/zv00dwWH/1560.jpg" alt="Project 1"></div>
+    <div class="proj-card" data-cat="commercial"><img class="proj-img" src="https://i.postimg.cc/fWK2TsFs/1578.jpg" alt="Project 2"></div>
+    <div class="proj-card" data-cat="industrial"><img class="proj-img" src="https://i.postimg.cc/qMvmNYV9/1580.jpg" alt="Project 3"></div>
+    <div class="proj-card" data-cat="residential"><img class="proj-img" src="https://i.postimg.cc/KcNqvbVv/1583.jpg" alt="Project 4"></div>
+    <div class="proj-card" data-cat="commercial"><img class="proj-img" src="https://i.postimg.cc/ryJnFTbx/1584.jpg" alt="Project 5"></div>
+    <div class="proj-card" data-cat="residential"><img class="proj-img" src="https://i.postimg.cc/KcNqvbVz/1585.jpg" alt="Project 6"></div>
+    <div class="proj-card" data-cat="industrial"><img class="proj-img" src="https://i.postimg.cc/J4zTsgCw/1591.jpg" alt="Project 7"></div>
+    <div class="proj-card" data-cat="commercial"><img class="proj-img" src="https://i.postimg.cc/Wb19dKLX/1594.jpg" alt="Project 8"></div>
   </div>
 </section>
 
-<!-- PROCESS -->
 <section class="process">
   <div style="text-align:center">
     <div class="section-tag reveal" style="justify-content:center">How We Work</div>
@@ -1160,7 +1557,6 @@
   </div>
 </section>
 
-<!-- STATS -->
 <div class="stats-section">
   <div class="stats-item">
     <div class="stats-num" data-target="15">0</div>
@@ -1184,7 +1580,6 @@
   </div>
 </div>
 
-<!-- TESTIMONIALS -->
 <section class="testimonials">
   <div class="section-tag reveal">Client Stories</div>
   <h2 class="section-title reveal">What Our <em>Clients</em> Say</h2>
@@ -1237,85 +1632,40 @@
         </div>
       </div>
     </div>
-    <div class="testimonial-card">
-      <div class="testimonial-quote">"</div>
-      <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="testimonial-text">Renovating a 60-year-old heritage bungalow is tricky. Diya respected every original element while modernising plumbing, electrical, and interiors. The restoration work is truly exceptional craftsmanship.</p>
-      <div class="testimonial-author">
-        <img class="author-avatar" src="https://i.pravatar.cc/150?img=60" alt="Meenakshi Iyer">
-        <div>
-          <div class="author-name">Meenakshi Iyer</div>
-          <div class="author-role">Homeowner, Adyar</div>
-        </div>
-      </div>
-    </div>
-    <!-- Duplicate for seamless loop -->
-    <div class="testimonial-card">
-      <div class="testimonial-quote">"</div>
-      <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="testimonial-text">Diya Constructions delivered our 24-villa project three weeks ahead of schedule. The finish quality is impeccable — from the Athangudi tile work to the smart home wiring. Our buyers are thrilled.</p>
-      <div class="testimonial-author">
-        <img class="author-avatar" src="https://i.pravatar.cc/150?img=11" alt="Suresh Raman">
-        <div><div class="author-name">Suresh Raman</div><div class="author-role">MD, SriRam Realty Developers</div></div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="testimonial-quote">"</div>
-      <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="testimonial-text">We shortlisted four contractors for our IT park. Diya stood out not just on price but on their technical depth, ISO processes, and project management software. The handover was seamless.</p>
-      <div class="testimonial-author">
-        <img class="author-avatar" src="https://i.pravatar.cc/150?img=32" alt="Priya Nair">
-        <div><div class="author-name">Priya Nair</div><div class="author-role">VP Infrastructure, TechVista Corp</div></div>
-      </div>
-    </div>
-    <div class="testimonial-card">
-      <div class="testimonial-quote">"</div>
-      <div class="star-row"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
-      <p class="testimonial-text">My dream home was built exactly as I envisioned — even better. The site engineer called me every Friday with photo updates. I felt involved throughout. The interior finish is magazine-worthy.</p>
-      <div class="testimonial-author">
-        <img class="author-avatar" src="https://i.pravatar.cc/150?img=47" alt="Kavitha Balaji">
-        <div><div class="author-name">Kavitha Balaji</div><div class="author-role">Homeowner, ECR Villa</div></div>
-      </div>
-    </div>
   </div>
 </section>
 
-<!-- TEAM -->
 <section class="team" id="team">
   <div class="section-tag reveal">Leadership</div>
   <h2 class="section-title reveal"><em>Masters</em> Behind the Build</h2>
   <div class="team-grid">
     <div class="team-card reveal">
-      <img class="team-img" src="https://i.postimg.cc/pTSq3wBB/IMG-20260403-125811.jpg" alt="Rajesh Kumar">
+      <img class="team-img" src="https://i.postimg.cc/pTSq3wBB/IMG-20260403-125811.jpg" alt="Harish Kumar">
       <div class="team-info">
         <div class="team-name">Harish Kumar</div>
         <div class="team-role">Founder & Managing Director</div>
         <p class="team-bio">10+ years in civil engineering. Personally oversees all landmark projects and client relationships.</p>
         <div class="team-social">
           <a href="#"><img style="width: 100%; height: 100%;" src="https://i.postimg.cc/Kz9WrZ8G/icons8-linkedin-48.png" alt="LinkedIn"></a>
-            <a href="#"><img style="width: 100%; height: 100%;" src="https://static.vecteezy.com/system/resources/previews/018/930/415/original/instagram-logo-instagram-icon-transparent-free-png.png" alt="LinkedIn"></a>
+          <a href="#"><img style="width: 100%; height: 100%;" src="https://static.vecteezy.com/system/resources/previews/018/930/415/original/instagram-logo-instagram-icon-transparent-free-png.png" alt="Instagram"></a>
         </div>
       </div>
     </div>
     <div class="team-card reveal">
-      <img class="team-img" src="https://i.postimg.cc/nzW0Ny10/Screenshot-2026-04-03-12-57-30-03-1c337646f29875672b5a61192b9010f9.jpg
-" alt="Anitha Suresh">
+      <img class="team-img" src="https://i.postimg.cc/nzW0Ny10/Screenshot-2026-04-03-12-57-30-03-1c337646f29875672b5a61192b9010f9.jpg" alt="Vignesh Kumar">
       <div class="team-info">
         <div class="team-name">Vignesh Kumar</div>
         <div class="team-role">Chief Architect</div>
         <p class="team-bio">10+ years in civil engineering. Personally oversees all landmark projects and client relationships.</p>
         <div class="team-social">
-           <a href="#"><img style="width: 100%; height: 100%;" src="https://i.postimg.cc/Kz9WrZ8G/icons8-linkedin-48.png" alt="LinkedIn"></a>
-           <a href="#"><img style="width: 100%; height: 100%;" src="https://static.vecteezy.com/system/resources/previews/018/930/415/original/instagram-logo-instagram-icon-transparent-free-png.png" alt="LinkedIn"></a>
+          <a href="#"><img style="width: 100%; height: 100%;" src="https://i.postimg.cc/Kz9WrZ8G/icons8-linkedin-48.png" alt="LinkedIn"></a>
+          <a href="#"><img style="width: 100%; height: 100%;" src="https://static.vecteezy.com/system/resources/previews/018/930/415/original/instagram-logo-instagram-icon-transparent-free-png.png" alt="Instagram"></a>
         </div>
-      </div>
-    </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- BLOG -->
 <section class="blog" id="blog">
   <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:20px">
     <div>
@@ -1364,7 +1714,6 @@
   </div>
 </section>
 
-<!-- QUOTATION / CONTACT -->
 <section class="quotation" id="contact">
   <div class="quote-form-wrap reveal">
     <div class="section-tag">Free Estimate</div>
@@ -1423,6 +1772,7 @@
       ✓ Thank you! Our team will contact you within 24 hours with a detailed estimate.
     </div>
   </div>
+
   <div class="quote-info reveal">
     <div class="section-tag">Contact Us</div>
     <h3 class="section-title" style="font-size:38px">Let's <em>Build</em><br>Together</h3>
@@ -1460,14 +1810,13 @@
     <div class="map-placeholder">
       <div class="map-grid-bg"></div>
       <div class="map-dot">
-        <div class="map-dot-pulse"><a href="https://www.google.co.in/maps/place/12%C2%B030'44.0%22N+79%C2%B053'21.4%22E/@12.5122314,79.8708239,15z/data=!3m1!4b1!4m13!1m8!3m7!1s0x3a531b7ab2928a35:0x50a0a27481632d63!2sMaduranthakam,+Tamil+Nadu+603306!3b1!8m2!3d12.5089244!4d79.8847355!16zL20vMGY1Zzhn!3m3!8m2!3d12.512232!4d79.889278?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank"></a></div>
-        <div class="map-dot-inner"><a href="https://www.google.co.in/maps/place/12%C2%B030'44.0%22N+79%C2%B053'21.4%22E/@12.5122314,79.8708239,15z/data=!3m1!4b1!4m13!1m8!3m7!1s0x3a531b7ab2928a35:0x50a0a27481632d63!2sMaduranthakam,+Tamil+Nadu+603306!3b1!8m2!3d12.5089244!4d79.8847355!16zL20vMGY1Zzhn!3m3!8m2!3d12.512232!4d79.889278?entry=ttu&g_ep=EgoyMDI2MDMzMS4wIKXMDSoASAFQAw%3D%3D" target="_blank"></a></div>
+        <div class="map-dot-pulse"></div>
+        <div class="map-dot-inner"></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-grid">
     <div class="footer-brand">
@@ -1480,23 +1829,21 @@
       </a>
       <p>We transform visions into enduring structures. From the foundation to the finishing touch, Diya Constructions stands as your trusted partner in building a better tomorrow.</p>
       <div class="footer-social">
-        <div class="footer-social">
-  <a href="#" title="Facebook">
-    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-  </a>
-  <a href="#" title="Instagram">
-    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
-  </a>
-  <a href="#" title="LinkedIn">
-    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-  </a>
-  <a href="#" title="YouTube">
-    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
-  </a>
-  <a href="#" title="Twitter / X">
-    <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-  </a>
-</div>
+        <a href="#" title="Facebook">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="#" title="Instagram">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="#" title="LinkedIn">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </a>
+        <a href="#" title="YouTube">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon fill="white" points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
+        </a>
+        <a href="#" title="Twitter / X">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.73-8.835L1.254 2.25H8.08l4.259 5.631 5.905-5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </a>
       </div>
     </div>
     <div class="footer-col">
@@ -1532,10 +1879,8 @@
   </div>
 </footer>
 
-<!-- BACK TO TOP -->
 <button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<!-- PROJECT DETAIL MODAL -->
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal">
     <button class="modal-close" onclick="document.getElementById('modalOverlay').classList.remove('open')">×</button>
@@ -1544,47 +1889,60 @@
 </div>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursorFollower');
-  let mx = 0, my = 0, fx = 0, fy = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
-  });
-  function animateFollower() {
-    fx += (mx - fx) * 0.12; fy += (my - fy) * 0.12;
-    follower.style.left = fx + 'px'; follower.style.top = fy + 'px';
-    requestAnimationFrame(animateFollower);
-  }
-  animateFollower();
-  document.querySelectorAll('a,button,.proj-card,.team-card,.service-card,.blog-card').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width = '20px'; cursor.style.height = '20px'; cursor.style.background = '#E8B84B';
-      follower.style.width = '60px'; follower.style.height = '60px';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width = '12px'; cursor.style.height = '12px'; cursor.style.background = 'var(--gold)';
-      follower.style.width = '36px'; follower.style.height = '36px';
-    });
-  });
+  const isMobile = window.matchMedia("(max-width: 640px)").matches;
 
-  // Nav scroll
+  if (!isMobile) {
+    const cursor = document.getElementById('cursor');
+    const follower = document.getElementById('cursorFollower');
+    let mx = 0, my = 0, fx = 0, fy = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX;
+      my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    function animateFollower() {
+      fx += (mx - fx) * 0.12;
+      fy += (my - fy) * 0.12;
+      follower.style.left = fx + 'px';
+      follower.style.top = fy + 'px';
+      requestAnimationFrame(animateFollower);
+    }
+    animateFollower();
+
+    document.querySelectorAll('a,button,.proj-card,.team-card,.service-card,.blog-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '20px';
+        cursor.style.height = '20px';
+        cursor.style.background = '#E8B84B';
+        follower.style.width = '60px';
+        follower.style.height = '60px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '12px';
+        cursor.style.height = '12px';
+        cursor.style.background = 'var(--gold)';
+        follower.style.width = '36px';
+        follower.style.height = '36px';
+      });
+    });
+  }
+
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('scrolled', window.scrollY > 60);
     document.getElementById('backTop').classList.toggle('visible', window.scrollY > 400);
   });
 
-  // Hero BG load animation
   window.addEventListener('load', () => {
     document.getElementById('heroBg').classList.add('loaded');
   });
 
-  // Reveal on scroll
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, i) => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         setTimeout(() => entry.target.classList.add('visible'), 100 * (Array.from(reveals).indexOf(entry.target) % 4));
         observer.unobserve(entry.target);
@@ -1593,72 +1951,62 @@
   }, { threshold: 0.12 });
   reveals.forEach(el => observer.observe(el));
 
-  // Count up animation
   function countUp(el, target) {
     let count = 0;
     const step = target / 60;
     const timer = setInterval(() => {
       count = Math.min(count + step, target);
-      el.textContent = Math.floor(count) + (el.parentElement.querySelector('.stats-label')?.textContent.includes('%') ? '' : '');
-      if (count >= target) { el.textContent = target; clearInterval(timer); }
+      el.textContent = Math.floor(count);
+      if (count >= target) {
+        el.textContent = target;
+        clearInterval(timer);
+      }
     }, 25);
   }
-  const statsObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.querySelectorAll('[data-target]').forEach(el => {
-          countUp(el, parseInt(el.dataset.target));
-        });
-        statsObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.3 });
-  statsObserver.observe(document.querySelector('.stats-section'));
 
-  // Mobile nav
+  const statsSection = document.querySelector('.stats-section');
+  if (statsSection) {
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.querySelectorAll('[data-target]').forEach(el => {
+            countUp(el, parseInt(el.dataset.target));
+          });
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+
+    statsObserver.observe(statsSection);
+  }
+
   function toggleMobileNav() {
     document.getElementById('mobileNav').classList.toggle('open');
     document.getElementById('hamburger').classList.toggle('open');
   }
 
-  // Project filter
-  function filterProjects(cat, btn) {
-    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.proj-card').forEach(card => {
-      if (cat === 'all' || card.dataset.cat === cat) {
-        card.style.display = '';
-        card.style.opacity = '0';
-        setTimeout(() => { card.style.transition = 'opacity 0.5s'; card.style.opacity = '1'; }, 50);
-      } else {
-        card.style.display = 'none';
-      }
-    });
-  }
-
-  // Quote form
   function submitQuote() {
     const name = document.getElementById('f-name').value;
     const phone = document.getElementById('f-phone').value;
     const type = document.getElementById('f-type').value;
+
     if (!name || !phone || !type) {
       alert('Please fill in Name, Phone, and Project Type to proceed.');
       return;
     }
+
     document.getElementById('formSuccess').style.display = 'block';
     document.getElementById('quoteForm').style.opacity = '0.4';
     document.getElementById('quoteForm').style.pointerEvents = 'none';
     document.querySelector('.form-submit').style.display = 'none';
   }
 
-  // Modal
   function closeModal(e) {
     if (e.target === document.getElementById('modalOverlay')) {
       document.getElementById('modalOverlay').classList.remove('open');
     }
   }
 
-  // Smooth active nav on scroll
   const sections = document.querySelectorAll('section[id], div[id]');
   window.addEventListener('scroll', () => {
     let current = '';
@@ -1669,9 +2017,6 @@
       a.style.color = a.getAttribute('href') === '#' + current ? 'var(--gold)' : '';
     });
   });
-        const icon = document.createElement("i");
-        icon.className = "fi fi-rr-star";
-        document.body.appendChild(icon);
 </script>
 </body>
 </html>
